@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Path 
-{
+public class Path {
+
     [SerializeField, HideInInspector]
     List<Vector2> points;
 
     public Path(Vector2 centre)
     {
-        points = new List<Vector2>{
-            centre + Vector2.left,
-            centre + (Vector2.left + Vector2.up) * 0.5f,
-            centre + (Vector2.right + Vector2.down) * 0.5f,
+        points = new List<Vector2>
+        {
+            centre+Vector2.left,
+            centre+(Vector2.left+Vector2.up)*.5f,
+            centre + (Vector2.right+Vector2.down)*.5f,
             centre + Vector2.right
         };
-        
     }
 
     public Vector2 this[int i]
@@ -46,13 +46,14 @@ public class Path
     public void AddSegment(Vector2 anchorPos)
     {
         points.Add(points[points.Count - 1] * 2 - points[points.Count - 2]);
-        points.Add((points[points.Count - 1] + anchorPos) * 0.5f);
+        points.Add((points[points.Count - 1] + anchorPos) * .5f);
         points.Add(anchorPos);
     }
 
+
     public Vector2[] GetPointsInSegment(int i)
     {
-        return new Vector2[] { points[i * 3], points[i * 3 + 2], points[i * 3 + 3] };
+        return new Vector2[] { points[i * 3], points[i * 3 + 1], points[i * 3 + 2], points[i * 3 + 3] };
     }
     
     public void MovePoint(int i, Vector2 pos)
